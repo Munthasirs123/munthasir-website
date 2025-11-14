@@ -11,10 +11,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // ADD THE FONTS HERE
       fontFamily: {
         sans: ["var(--font-inter)"],
         serif: ["var(--font-lora)"],
       },
+      // DEFINE OUR NEW COLOR PALETTE HERE
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -59,11 +61,11 @@ const config: Config = {
 
             // Set the base font family for prose content
             "p, ul, ol, blockquote": {
-              fontFamily: theme("fontFamily.serif").join(", "),
+              fontFamily: theme("fontFamily.serif"),
             },
             // Set the heading font family
             "h1, h2, h3, h4, h5, h6": {
-              fontFamily: theme("fontFamily.sans").join(", "),
+              fontFamily: theme("fontFamily.sans"),
             },
             // Style links
             a: {
