@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getPageContent } from "@/lib/posts"; // Import our new function
+import { getPageContent } from "@/lib/posts"; // Import our function to read Markdown
 
 export const metadata: Metadata = {
   title: "About",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  // Fetch the content from the Markdown file
+  // Fetch the content from the 'content/pages/about.md' file
   const page = await getPageContent("about");
 
   return (
@@ -19,21 +19,17 @@ export default async function AboutPage() {
         </h1>
       </header>
 
-      {/* 
-        This section now has a simpler structure. The image remains,
-        but the text content will be rendered from Markdown.
-      */}
       <section className="flex flex-col sm:flex-row items-start gap-8">
         <div className="w-32 h-32 relative flex-shrink-0">
           <Image
-            src="/profile.jpg" // The path to your image in the 'public' folder
+            src="/profile.jpg" // Make sure you have this image in your 'public' folder
             alt="Portrait of Munthasir Shiraz"
             fill
             className="rounded-lg object-cover"
           />
         </div>
 
-        {/* The prose class styles the HTML rendered from your Markdown file */}
+        {/* This div now renders the HTML from your Markdown file */}
         <div
           className="prose dark:prose-invert"
           dangerouslySetInnerHTML={{ __html: page.contentHtml }}
