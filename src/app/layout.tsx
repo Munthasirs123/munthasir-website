@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Inter, Lora } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Github, Twitter, Linkedin } from "lucide-react";
 
-const inter = Inter({
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const lora = Lora({
-  subsets: ["latin"],
-  variable: "--font-lora",
+  weight: ["400", "500", "700"],
+  variable: "--font-plex-mono",
 });
 
 export const metadata: Metadata = {
   title: "Munthasir Shiraz",
-  description: "Personal site of Munthasir Shiraz.",
+  description: "Developer & Writer. Building digital experiences and exploring the creative process.",
 };
 
 export default function RootLayout({
@@ -29,55 +26,78 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${lora.variable}`}
+      className={`${plexMono.variable} h-full`}
     >
-      {/* --- CHANGES START HERE --- */}
-      <body className="font-serif antialiased">
+      <body className="font-sans antialiased h-full">
         <ThemeProvider>
-          <div className="min-h-screen flex flex-col">
-            {/* Header: Simplified and using new colors/fonts */}
-            <header className="border-b border-foreground/10 bg-background">
-              <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-                <Link
-                  href="/"
-                  className="font-sans font-semibold tracking-tight"
-                >
-                  Munthasir Shiraz
-                </Link>
+          <div className="max-w-7xl mx-auto">
+            <div className="flex min-h-screen">
+              {/* --- SIDEBAR --- */}
+              <aside className="hidden lg:flex flex-col w-72 border-r border-blackish p-8">
+                <div className="flex flex-col">
+                  <Link href="/" className="font-bold text-lg tracking-tighter">
+                    Munthasir Shiraz
+                  </Link>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Building digital experiences, writing about tech, and exploring the creative process.
+                  </p>
+                </div>
+                <nav className="mt-12 flex flex-col gap-3">
+                  <Link href="/" className="text-muted-foreground hover:text-foreground">Home</Link>
+                  <Link href="/blog" className="text-muted-foreground hover:text-foreground">Blog</Link>
+                  <Link href="/projects" className="text-muted-foreground hover:text-foreground">Projects</Link>
+                  <Link href="/about" className="text-muted-foreground hover:text-foreground">About</Link>
+                  <Link href="#" className="text-muted-foreground hover:text-foreground">Brain</Link>
+                </nav>
+
+                <div className="flex-1" />
+
                 <div className="flex items-center gap-4">
-                  <nav className="font-sans flex items-center gap-4 text-sm text-foreground/80">
-                    <Link href="/blog" className="hover:text-accent">
-                      Blog
-                    </Link>
-                    <Link href="/projects" className="hover:text-accent">
-                      Projects
-                    </Link>
-                    <Link href="/about" className="hover:text-accent">
-                      About
-                    </Link>
-                  </nav>
-                  {/* We can revisit the theme toggle's styling later if needed */}
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                    <Github size={20} />
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                    <Twitter size={20} />
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                    <Linkedin size={20} />
+                  </a>
+                </div>
+                <div className="mt-4">
                   <ThemeToggle />
                 </div>
-              </div>
-            </header>
+              </aside>
 
-            {/* Main content area remains the same, but will inherit the new styles */}
-            <main className="flex-1">
-              <div className="max-w-3xl mx-auto px-4 py-10">{children}</div>
-            </main>
+              {/* --- MAIN CONTENT AREA --- */}
+              <main className="flex-1 overflow-y-auto">
+                {/* --- HEADER --- */}
+                <header className="sticky top-0 z-50 bg-background">
+                  <div className="container flex h-14 items-center justify-between px-4 md:px-6">
+                    {/* Mobile menu button and logo */}
+                    <div className="flex items-center gap-4 lg:hidden">
+                      <Link href="/" className="font-bold text-lg tracking-tighter">
+                        Munthasir Shiraz
+                      </Link>
+                    </div>
 
-            {/* Footer: Simplified and using new colors/fonts */}
-            <footer className="border-t border-foreground/10 bg-background">
-              <div className="font-sans max-w-3xl mx-auto px-4 py-6 text-xs text-foreground/60 flex items-center justify-between">
-                <span>© {new Date().getFullYear()} Munthasir Shiraz</span>
-                <span>Built with Next.js &amp; deployed on Vercel</span>
-              </div>
-            </footer>
-          </div>
+                    {/* Desktop navigation (optional, can be empty since sidebar handles nav) */}
+                    <nav className="hidden lg:flex items-center gap-6 ml-auto">
+                      {/* You can add additional header items here if needed */}
+                    </nav>
+
+                    {/* Mobile theme toggle */}
+                    <div className="lg:hidden">
+                      <ThemeToggle />
+                    </div>
+                  </div>
+                </header>
+
+                {children}
+              </main>
+            </div>
+          </div>  
         </ThemeProvider>
       </body>
-      {/* --- CHANGES END HERE --- */}
     </html>
   );
 }

@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { getAllProjects } from "@/lib/posts"; // Import our new function
+import { getAllProjects } from "@/lib/posts";
+import type { Project } from "@/lib/posts";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -7,41 +11,57 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  // Fetch the projects from the content directory
-  const projects = getAllProjects();
+  const projects: Project[] = getAllProjects();
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="container py-12 md:py-24 px-4 md:px-6">
       <header className="mb-12">
-        <h1 className="font-sans text-3xl font-bold tracking-tight">
+        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">
           Projects
         </h1>
-        <p className="font-serif text-lg text-foreground/80 mt-4">
-          Here are a few things I've built and worked on. Some were for clients,
-          some for fun, and some just to learn something new.
+        <p className="mt-4 max-w-[700px] text-muted-foreground md:text-xl">
+          Open-source projects I've made over the years, including tools, libraries, frameworks, and experiments.
         </p>
       </header>
 
-      {/* Project List */}
-      <ul className="space-y-8">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <li key={project.title}>
-            <a
-              href={project.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block group"
-            >
-              <h2 className="font-sans text-xl font-semibold tracking-tight group-hover:text-accent">
-                {project.title}
-              </h2>
-              <p className="mt-2 font-serif text-foreground/80">
+          <Card
+            key={project.title}
+            className="border-2 border-blackish shadow-[8px_8px_0px_#1A1A1A] flex flex-col bg-cream hover:-translate-y-1 transition-transform"
+          >
+            <CardHeader>
+              <h2 className="text-2xl font-bold">{project.title}</h2>
+            </CardHeader>
+            <CardContent className="flex flex-col flex-1 p-6 pt-0">
+              <p className="text-muted-foreground flex-1">
                 {project.description}
               </p>
-            </a>
-          </li>
+              <div className="flex flex-wrap gap-2 my-6">
+                {project.tags.map((tag) => (
+                  <Badge key={tag} variant="default" className="border-2 border-blackish">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 mt-auto">
+                {project.links.map((link) => (
+                  <a
+                    key={link.type}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="outline" className="border-2 border-blackish bg-cream shadow-[4px_4px_0px_#1A1A1A] hover:shadow-[2px_2px_0px_#1A1A1A] active:shadow-[1px_1px_0px_#1A1A1A] transition-all">
+                      {link.type.toUpperCase()}
+                    </Button>
+                  </a>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

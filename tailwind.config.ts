@@ -4,28 +4,86 @@ import typography from "@tailwindcss/typography";
 const config: Config = {
   darkMode: "class",
   content: [
-    "./src/app/**/*.{js,ts,jsx,tsx,md}",
-    "./src/components/**/*.{js,ts,jsx,tsx,md}",
-    "./src/**/*.{js,ts,jsx,tsx,md}",
-    "./content/**/*.{md}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './content/**/*.{md,mdx}',
   ],
   theme: {
-    extend: {
-      // ADD THE FONTS HERE
-      fontFamily: {
-        sans: ["var(--font-inter)"],
-        serif: ["var(--font-lora)"],
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
       },
-      // DEFINE OUR NEW COLOR PALETTE HERE
+    },
+    extend: {
+      // ADDING YOUR BRAND COLORS
       colors: {
+        'cream': '#F0EAD6',
+        'blackish': '#1A1A1A',
+        'mustard': '#E8AF00',
+        'teal': '#00A0A0',
+        'tangerine': '#F08080',
+        'pink': '#F8B195',
+        // --- shadcn colors ---
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
-      // --- ADD THIS ENTIRE TYPOGRAPHY SECTION ---
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        sans: ["var(--font-plex-mono)", "monospace"], // Ensure the mono font is set
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      // Typography plugin styles
       typography: ({ theme }: { theme: (path: string) => string }) => ({
         DEFAULT: {
           css: {
@@ -36,38 +94,26 @@ const config: Config = {
             "--tw-prose-bold": theme("colors.foreground"),
             "--tw-prose-counters": theme("colors.foreground"),
             "--tw-prose-bullets": theme("colors.foreground"),
-            "--tw-prose-hr": theme("colors.foreground / 0.1"),
+            "--tw-prose-hr": "hsl(var(--border))",
             "--tw-prose-quotes": theme("colors.foreground"),
-            "--tw-prose-quote-borders": theme("colors.foreground / 0.1"),
-            "--tw-prose-captions": theme("colors.foreground / 0.7"),
+            "--tw-prose-quote-borders": "hsl(var(--border))",
+            "--tw-prose-captions": theme("colors.muted.foreground"),
             "--tw-prose-code": theme("colors.foreground"),
             "--tw-prose-pre-code": theme("colors.foreground"),
-            "--tw-prose-pre-bg": theme("colors.foreground / 0.05"),
-            // Invert styles for dark mode automatically
+            "--tw-prose-pre-bg": "hsl(var(--muted))",
             "--tw-prose-invert-body": theme("colors.foreground"),
             "--tw-prose-invert-headings": theme("colors.foreground"),
             "--tw-prose-invert-lead": theme("colors.foreground"),
             "--tw-prose-invert-links": theme("colors.accent.DEFAULT"),
             "--tw-prose-invert-bold": theme("colors.foreground"),
-            "--tw-prose-invert-counters": theme("colors.foreground"),
-            "--tw-prose-invert-bullets": theme("colors.foreground"),
-            "--tw-prose-invert-hr": theme("colors.foreground / 0.1"),
-            "--tw-prose-invert-quotes": theme("colors.foreground"),
-            "--tw-prose-invert-quote-borders": theme("colors.foreground / 0.1"),
-            "--tw-prose-invert-captions": theme("colors.foreground / 0.7"),
-            "--tw-prose-invert-code": theme("colors.foreground"),
-            "--tw-prose-invert-pre-code": theme("colors.foreground"),
-            "--tw-prose-invert-pre-bg": theme("colors.foreground / 0.05"),
-
-            // Set the base font family for prose content
+            
+            // Font families
             "p, ul, ol, blockquote": {
-              fontFamily: theme("fontFamily.serif"),
+              fontFamily: theme("fontFamily.sans"),
             },
-            // Set the heading font family
             "h1, h2, h3, h4, h5, h6": {
               fontFamily: theme("fontFamily.sans"),
             },
-            // Style links
             a: {
               fontWeight: "500",
               textDecoration: "none",
@@ -80,7 +126,7 @@ const config: Config = {
       }),
     },
   },
-  plugins: [typography],
+  plugins: [require("tailwindcss-animate"), typography],
 };
 
 export default config;

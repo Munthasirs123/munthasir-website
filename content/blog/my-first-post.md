@@ -2,6 +2,8 @@
 title: "Building my personal site"
 date: "2025-11-14"
 description: "Thinking through the architecture, stack, and experience for my new home on the internet."
+category: "Tech"
+readTime: "5 min read"
 ---
 
 This is my very first post on this site.

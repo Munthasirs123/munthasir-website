@@ -1,56 +1,70 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Global smooth transition for all color-related properties */
-*,
-*::before,
-*::after {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
+@layer base {
+  :root {
+    /* Mapped to your new color palette */
+    --background: 43 33% 92%;  /* cream */
+    --foreground: 0 0% 6%;     /* blackish */
+    --border: 0 0% 6%;         /* blackish */
+    --ring: 0 0% 6%;           /* blackish */
+    
+    --card: 43 33% 92%;
+    --card-foreground: 0 0% 6%;
+    --popover: 43 33% 92%;
+    --popover-foreground: 0 0% 6%;
+    --primary: 0 0% 6%;
+    --primary-foreground: 43 33% 92%;
+    
+    /* Secondary and muted colors */
+    --secondary: 43 33% 85%;
+    --secondary-foreground: 0 0% 6%;
+    --muted: 43 33% 85%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 43 33% 85%;
+    --accent-foreground: 0 0% 6%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --input: 0 0% 6%;
+
+    --radius: 0.8rem;
+  }
+
+  .dark {
+    /* Dark theme using inverted colors */
+    --background: 0 0% 6%;
+    --foreground: 43 33% 92%;
+    --border: 43 33% 92%;
+    --ring: 43 33% 92%;
+    
+    --card: 0 0% 6%;
+    --card-foreground: 43 33% 92%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 43 33% 92%;
+    --primary: 43 33% 92%;
+    --primary-foreground: 0 0% 6%;
+    
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 43 33% 92%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 43 33% 92%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --input: 0 0% 15%;
+  }
 }
 
-/* Define our new color variables */
-:root {
-  --background: 0 0% 100%; /* White */
-  --foreground: 240 10% 3.9%; /* Near Black */
-  --accent: 210 40% 50%; /* A nice blue */
-  --accent-foreground: 210 40% 98%; /* Light text for on top of the accent color */
-}
-
-.dark {
-  --background: 240 10% 3.9%; /* Near Black */
-  --foreground: 0 0% 98%; /* Off-white */
-  --accent: 210 40% 50%; /* Blue remains the same */
-  --accent-foreground: 210 40% 98%;
-}
-
-body {
-  /* Apply the new background and text colors */
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-}
-
-/*
-  ===============
-  View Transition API Styles
-  ===============
-  This controls the "buttery smooth" cross-fade animation.
-*/
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-  z-index: 9999;
-}
-
-.dark::view-transition-old(root) {
-  z-index: 1;
-}
-
-.dark::view-transition-new(root) {
-  z-index: 9999;
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  * {
+    @apply border-foreground;
+  }
 }

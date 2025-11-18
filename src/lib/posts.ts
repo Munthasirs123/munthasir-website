@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-// --- ADD THESE TWO IMPORTS ---
 import { remark } from "remark";
 import html from "remark-html";
 
@@ -11,8 +10,18 @@ export type BlogPost = {
   date: string;
   description?: string;
   content?: string;
-  // --- ADD THIS NEW PROPERTY ---
   contentHtml?: string;
+  category: string;
+  readTime: string;
+};
+
+// --- PROJECT TYPE DEFINITION ---
+export type Project = {
+  title: string;
+  description: string;
+  date: string;
+  tags: string[];
+  links: { type: string; href: string }[];
 };
 
 const contentDir = path.join(process.cwd(), "content", "blog");
@@ -32,6 +41,8 @@ export function getAllBlogPosts(): BlogPost[] {
         title: data.title as string,
         date: data.date as string,
         description: data.description as string | undefined,
+        category: data.category as string,
+        readTime: data.readTime as string,
       };
     })
     .sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -39,7 +50,6 @@ export function getAllBlogPosts(): BlogPost[] {
   return posts;
 }
 
-// --- REPLACE THE ENTIRE getBlogPostBySlug FUNCTION WITH THIS ASYNC VERSION ---
 export async function getBlogPostBySlug(
   slug: string
 ): Promise<BlogPost | null> {
@@ -62,11 +72,11 @@ export async function getBlogPostBySlug(
     date: data.date as string,
     description: data.description as string | undefined,
     content,
-    contentHtml, // Add the processed HTML
+    contentHtml,
+    category: data.category as string,
+    readTime: data.readTime as string,
   };
 }
-
-// --- ADD THIS NEW FUNCTION ---
 
 // A generic function to get content for a single page (like 'about')
 export async function getPageContent(fileName: string) {
@@ -89,12 +99,12 @@ export async function getPageContent(fileName: string) {
   };
 }
 
-// --- ADD THIS NEW FUNCTION ---
-export function getAllProjects() {
+// --- GET ALL PROJECTS WITH PROPER TYPING ---
+export function getAllProjects(): Project[] {
   const projectsDir = path.join(process.cwd(), "content", "projects");
   const files = fs.readdirSync(projectsDir);
 
-  const projects = files
+  const projects: Project[] = files
     .filter((file) => file.endsWith(".md"))
     .map((file) => {
       const fullPath = path.join(projectsDir, file);
@@ -104,11 +114,12 @@ export function getAllProjects() {
       return {
         title: data.title as string,
         description: data.description as string,
-        href: data.href as string,
         date: data.date as string,
+        tags: data.tags || [], // If data.tags is missing, default to an empty array
+        links: data.links || [], // If data.links is missing, default to an empty array
       };
     })
-    .sort((a, b) => (a.date < b.date ? 1 : -1)); // Newest first
+    .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1));
 
   return projects;
 }
