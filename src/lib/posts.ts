@@ -15,13 +15,17 @@ export type BlogPost = {
   readTime: string;
 };
 
-// --- PROJECT TYPE DEFINITION ---
 export type Project = {
   title: string;
   description: string;
   date: string;
   tags: string[];
-  links: { type: string; href: string }[];
+  links: { type: "Article" | "Source" | "Demo"; href: string }[];
+  // We need slug to link to internal page. 
+  // Since we don't have it in the type definition in the original file, 
+  // we should add it or derive it. 
+  // Let's add it to the type and the return value.
+  slug: string;
 };
 
 const contentDir = path.join(process.cwd(), "content", "blog");
@@ -112,6 +116,7 @@ export function getAllProjects(): Project[] {
       const { data } = matter(source);
 
       return {
+        slug: file.replace(/\.md$/, ""),
         title: data.title as string,
         description: data.description as string,
         date: data.date as string,
@@ -122,4 +127,29 @@ export function getAllProjects(): Project[] {
     .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1));
 
   return projects;
+}
+
+export async function getProjectBySlug(slug: string): Promise<Project & { contentHtml: string } | null> {
+  const projectsDir = path.join(process.cwd(), "content", "projects");
+  const fullPath = path.join(projectsDir, `${slug}.md`);
+
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+
+  const source = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(source);
+
+  const processedContent = await remark().use(html).process(content);
+  const contentHtml = processedContent.toString();
+
+  return {
+    slug,
+    title: data.title as string,
+    description: data.description as string,
+    date: data.date as string,
+    tags: data.tags || [],
+    links: data.links || [],
+    contentHtml,
+  };
 }
