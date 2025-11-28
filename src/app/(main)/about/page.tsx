@@ -49,20 +49,25 @@ const timelineEvents: TimelineEvent[] = [
 export default function AboutPage() {
   return (
     <div className="container py-12 md:py-24 px-4 md:px-6">
-      <header className="mb-12 space-y-4">
+      <header className="mb-12 space-y-8">
 
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">
           About Me
         </h1>
-        <p className="max-w-[700px] text-muted-foreground md:text-xl">
-          {/* TODO: update this copy to your real story */}
-          Hi there! I'm based in Brooklyn, NY and currently work as a Senior
-          Full-Stack Developer at TechCorp. I build things for curious and
-          playful folks who love the web.
-        </p>
+        <div className="max-w-[700px] text-muted-foreground md:text-xl space-y-4">
+          <p>
+            I’m based in Greater Boston, MA and work as a Product Owner at CVS Health. Previously, I’ve held product, scrum master & analyst roles driving digital transformation for clients in diverse domains
+          </p>
+          <p>
+            I am typically the most technical person in a room full of business focused people, and the most business oriented person in a room full of technical people 🙂
+          </p>
+          <p>
+            In my spare time, I like to build apps, research AI and write about my learnings!
+          </p>
+        </div>
         <div className="flex flex-wrap gap-4">
           <Badge variant="default" className="border-2 border-blackish">
-            Brooklyn, NY
+            Greater Boston, MA
           </Badge>
           <Badge variant="mustard" className="border-2 border-blackish">
             Always up for coffee!

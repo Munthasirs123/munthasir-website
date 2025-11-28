@@ -28,7 +28,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${plexMono.variable} h-full overflow-y-scroll`}
     >
-      <body className="font-sans antialiased h-full">
+      <body className="font-sans antialiased h-full" suppressHydrationWarning>
         <ThemeProvider>
           {children}
         </ThemeProvider>

@@ -13,7 +13,7 @@ export type CanvasContent = {
     moodboard: string[];
     micro_wins: string[];
     thoughts: (string | { type: 'sticky' | 'text'; content: string })[];
-    latest_reads?: string[];
+    latest_reads?: (string | { title: string; url: string })[];
     visual_inspiration?: Array<{
         color: string;
         label: string;

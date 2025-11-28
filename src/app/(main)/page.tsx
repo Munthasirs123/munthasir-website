@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, User, BookOpen, PenSquare, BrainCircuit } from "lucide-react";
+import { ArrowRight, User, BookOpen, PenSquare, BrainCircuit, Github, Twitter, Linkedin, Mail, Download } from "lucide-react";
 import { UserAvatar } from "@/components/user-avatar";
 
 export default function HomePage() {
@@ -27,20 +27,41 @@ export default function HomePage() {
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-12">
           <div className="space-y-6 text-center md:text-left flex-1">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-              Hey, I'm Munthasir!
+              Hey I’m Shiraz!
             </h1>
-            <p className="text-muted-foreground md:text-xl max-w-3xl">
-              I'm a software developer, designer, and creative tinkerer. I love
-              building things that live on the internet and sharing what I learn
-              along the way.
-            </p>
+            <div className="space-y-4 text-muted-foreground md:text-xl max-w-3xl">
+              <p>
+                Welcome to my digital garden! A space for self-expression, ideas, scribbles & experiments.
+              </p>
+              <p>
+                Everything on this site is written by me, not AI 🙂
+              </p>
+            </div>
+
+            {/* Mobile-only: Resume & Socials */}
+            <div className="flex flex-col items-center md:items-start gap-6 mt-8 lg:hidden">
+              <div className="flex items-center gap-6">
+                <a href="https://github.com/Munthasirs123" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <Github size={24} />
+                </a>
+                <a href="https://x.com/MunthasirShiraz" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <Twitter size={24} />
+                </a>
+                <a href="https://www.linkedin.com/in/munthasirshiraz/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <Linkedin size={24} />
+                </a>
+                <a href="mailto:munthasirshiraz@gmail.com" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <Mail size={24} />
+                </a>
+              </div>
+            </div>
           </div>
           <UserAvatar className="w-40 h-40 md:w-56 md:h-56" />
         </div>
-      </section>
+      </section >
 
       {/* --- CARD GRID SECTION (v0-style layout) --- */}
-      <section className="container px-4 md:px-6 pb-12">
+      <section className="container px-4 md:px-6 pb-12" >
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
           {/* LEFT COLUMN: ABOUT (stretches to match right column height) */}
           <Link href="/about">
@@ -54,11 +75,10 @@ export default function HomePage() {
 
               <div className="flex-1">
                 <h2 className="text-3xl font-bold mb-4 dark:text-mustard">
-                  Building digital experiences with purpose.
+                  Building meaningful tools that add value!
                 </h2>
                 <p className="text-lg leading-relaxed dark:text-cream/90">
-                  I'm a full-stack developer who loves clean code, thoughtful design, and solving real problems.
-                  When I'm not coding, I'm exploring new tech, writing, or drinking way too much coffee.
+                  As a product lead, I've always loved solving problems through technology and the rise of AI has only furthered my passion to build and ship simple solutions that add genuine value.
                 </p>
               </div>
 
@@ -80,7 +100,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-2xl font-bold mb-2 dark:text-teal">Recent Work</h3>
                 <p className="mb-4 dark:text-cream/90">
-                  Check out my latest open-source libraries, apps, and experiments.
+                  Check out my latest experiments, apps & projects
                 </p>
                 <div className="flex items-center font-bold text-sm dark:text-teal">
                   VIEW PROJECTS <ArrowRight className="ml-2 h-4 w-4" />
@@ -99,7 +119,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-2xl font-bold mb-2 dark:text-tangerine">Latest Thoughts</h3>
                   <p className="mb-4 dark:text-cream/90">
-                    {latestPost.title}
+                    Scribbles on what I feel strongly about!
                   </p>
                   <div className="flex items-center font-bold text-sm dark:text-tangerine">
                     READ ARTICLES <ArrowRight className="ml-2 h-4 w-4" />
@@ -109,10 +129,10 @@ export default function HomePage() {
             )}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* --- THE CANVAS PORTAL --- */}
-      <section className="container px-4 md:px-6 py-12">
+      < section className="container px-4 md:px-6 py-12" >
         <div className="flex flex-col items-center gap-8">
           <div className="w-full border-4 border-blackish dark:border-cream bg-blackish p-2 rounded-xl shadow-[12px_12px_0px_#1A1A1A] dark:shadow-[12px_12px_0px_#F0E7DB] overflow-hidden">
 
@@ -132,10 +152,10 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
-      </section>
+      </section >
 
       {/* RECENT POSTS SECTION */}
-      <section className="container px-4 md:px-6 mt-12 pb-20">
+      < section className="container px-4 md:px-6 mt-12 pb-20" >
         <div className="flex justify-between items-end mb-8">
           <div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-2">Recent Posts</h2>
@@ -210,7 +230,7 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
-      </section>
+      </section >
     </>
   );
 }

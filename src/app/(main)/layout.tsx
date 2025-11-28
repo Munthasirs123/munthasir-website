@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Github, Twitter, Linkedin, PenSquare, BookOpen, User, BrainCircuit, FileText } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Github, Twitter, Linkedin, PenSquare, BookOpen, User, BrainCircuit, FileText, Mail, Download } from "lucide-react";
 
 export default function MainLayout({
     children,
@@ -20,11 +21,13 @@ export default function MainLayout({
                             <ThemeToggle />
                         </div>
 
-                        <hr className="border-blackish my-6" />
+                        <hr className="border-blackish my-4" />
 
-                        <p className="text-sm text-muted-foreground mb-6">
-                            Building digital experiences, writing about tech, and exploring the creative process.
+                        <p className="text-sm text-muted-foreground mb-4">
+                            I'm Shiraz, product lead passionate about making technology human. I build, blog & brainstorm in here!
                         </p>
+
+                        <hr className="border-blackish my-4" />
                     </div>
 
                     <nav className="flex flex-col gap-3">
@@ -50,17 +53,20 @@ export default function MainLayout({
                         </Link>
                     </nav>
 
-                    <hr className="border-blackish my-6" />
+                    <hr className="border-blackish my-4" />
 
                     <div className="flex items-center gap-4">
-                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                        <a href="https://github.com/Munthasirs123" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
                             <Github size={20} />
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                        <a href="https://x.com/MunthasirShiraz" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
                             <Twitter size={20} />
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
+                        <a href="https://www.linkedin.com/in/munthasirshiraz/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
                             <Linkedin size={20} />
+                        </a>
+                        <a href="mailto:munthasirshiraz@gmail.com" className="text-muted-foreground hover:text-foreground">
+                            <Mail size={20} />
                         </a>
                     </div>
                 </aside>
@@ -73,7 +79,13 @@ export default function MainLayout({
                             <Link href="/" className="font-bold text-lg tracking-tighter">
                                 Munthasir Shiraz
                             </Link>
-                            <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2">
+                                <a href="/resume.pdf" download>
+                                    <Button variant="outline" size="sm" className="h-8 border-2 border-blackish shadow-[2px_2px_0px_#1A1A1A] active:shadow-none transition-all">
+                                        <Download className="mr-2 h-3 w-3" />
+                                        Resume
+                                    </Button>
+                                </a>
                                 <ThemeToggle />
                             </div>
                         </div>

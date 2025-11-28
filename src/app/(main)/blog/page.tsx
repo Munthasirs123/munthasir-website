@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
           Blog
         </h1>
         <p className="mt-4 max-w-[700px] text-muted-foreground md:text-xl">
-          Essays, tutorials, and thoughts on web development, design, and the creative process. Updated regularly with new ideas and experiments.
+          I consolidate my most impactful learnings here!
         </p>
       </header>
 

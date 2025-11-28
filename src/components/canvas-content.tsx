@@ -29,7 +29,8 @@ export default function CanvasContent({ showBackLink = false }: { showBackLink?:
                         THE CANVAS
                     </h1>
                     <p className="text-sm text-muted-foreground dark:text-cream/60 italic">
-                        A Mental Dump
+                        A deep dive into my thoughts.<br />
+                        Unstructured. Unfiltered. Unscripted
                     </p>
                 </header>
 
@@ -127,36 +128,55 @@ export default function CanvasContent({ showBackLink = false }: { showBackLink?:
                     <div className="border-4 border-dashed border-pink dark:border-pink/70 p-8 bg-cream/50 dark:bg-blackish/50">
                         <h3 className="text-xl font-bold mb-4 dark:text-cream">LATEST READS</h3>
                         <ul className="space-y-2">
-                            {content.latest_reads.map((read, i) => (
-                                <li key={i} className="flex items-start gap-2 text-sm md:text-base dark:text-cream/90">
-                                    <BookOpen className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                                    <span>{read}</span>
-                                </li>
-                            ))}
+                            {content.latest_reads.map((read, i) => {
+                                const isLinked = typeof read !== 'string';
+                                const title = isLinked ? read.title : read;
+                                const url = isLinked ? read.url : null;
+
+                                return (
+                                    <li key={i} className="flex items-start gap-2 text-sm md:text-base dark:text-cream/90">
+                                        <BookOpen className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                                        {url ? (
+                                            <a
+                                                href={url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="hover:underline hover:text-pink dark:hover:text-pink transition-colors"
+                                            >
+                                                {title}
+                                            </a>
+                                        ) : (
+                                            <span>{title}</span>
+                                        )}
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 )}
 
-                {/* VISUAL INSPIRATION - 3x2 Grid */}
-                {content.visual_inspiration && content.visual_inspiration.length > 0 && (
+                {/* MOODBOARD - 3x2 Grid */}
+                {content.moodboard && content.moodboard.length > 0 && (
                     <div>
                         <div className="flex items-center gap-2 mb-4">
                             <div className="w-6 h-6 rounded-full bg-pink border-2 border-blackish dark:border-cream flex items-center justify-center">
                                 <span className="text-xs font-bold">📷</span>
                             </div>
-                            <h3 className="text-xl font-bold dark:text-cream">VISUAL INSPIRATION</h3>
+                            <h3 className="text-xl font-bold dark:text-cream">MOODBOARD</h3>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-                            {content.visual_inspiration.map((item, i) => (
-                                <div key={i} className={`${item.color} aspect-square border-4 border-blackish dark:border-cream shadow-[6px_6px_0px_#1A1A1A] dark:shadow-[6px_6px_0px_#F0E7DB] flex items-center justify-center p-4 transition-transform hover:scale-105`}>
-                                    <span className="text-lg md:text-xl font-bold text-center text-blackish dark:text-cream italic">
-                                        {item.label}
-                                    </span>
+                            {content.moodboard.map((imageUrl, i) => (
+                                <div key={i} className="aspect-square border-4 border-blackish dark:border-cream shadow-[6px_6px_0px_#1A1A1A] dark:shadow-[6px_6px_0px_#F0E7DB] overflow-hidden transition-transform hover:scale-105">
+                                    <img
+                                        src={imageUrl}
+                                        alt={`Moodboard image ${i + 1}`}
+                                        className="w-full h-full object-cover"
+                                    />
                                 </div>
                             ))}
                         </div>
                         <p className="text-xs text-center text-muted-foreground dark:text-cream/60 italic">
-                            Design of thinking work vibes™. Colors, shapes, and feelings that inspire my work.
+                            Visual inspiration that guides my journey and creative process.
                         </p>
                     </div>
                 )}

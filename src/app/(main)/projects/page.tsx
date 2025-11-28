@@ -21,59 +21,52 @@ export default function ProjectsPage() {
           Projects
         </h1>
         <p className="mt-4 max-w-[700px] text-muted-foreground md:text-xl">
-          Open-source projects I've made over the years, including tools, libraries, frameworks, and experiments.
+          Experiments, apps & projects I've had a ton of fun building!
         </p>
       </header>
 
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project) => (
-          <Card
-            key={project.title}
-            className="border-2 border-blackish dark:border-teal shadow-[8px_8px_0px_#1A1A1A] dark:shadow-[8px_8px_0px_#00A0A0] flex flex-col bg-cream dark:bg-blackish h-full hover:-translate-y-1 transition-transform cursor-pointer"
-          >
-            <CardHeader className="pb-2">
-              <div className="flex justify-between items-start mb-2">
-                <h2 className="text-2xl font-bold text-teal leading-tight">{project.title}</h2>
-                <span className="text-xs font-bold text-muted-foreground dark:text-teal/80 whitespace-nowrap ml-4">{new Date(project.date).getFullYear()}</span>
-              </div>
+          <Link key={project.title} href={`/projects/${project.slug}`}>
+            <Card
+              className="border-2 border-blackish dark:border-teal shadow-[8px_8px_0px_#1A1A1A] dark:shadow-[8px_8px_0px_#00A0A0] flex flex-col bg-cream dark:bg-blackish h-full hover:-translate-y-1 transition-transform cursor-pointer"
+            >
+              <CardHeader className="pb-2">
+                <div className="flex justify-between items-start mb-2">
+                  <h2 className="text-2xl font-bold text-teal leading-tight">{project.title}</h2>
+                  <span className="text-xs font-bold text-muted-foreground dark:text-teal/80 whitespace-nowrap ml-4">{new Date(project.date).getFullYear()}</span>
+                </div>
 
-              <div className="flex flex-wrap gap-2 mb-2">
-                {project.tags.map((tag) => (
-                  <Badge key={tag} variant="default" className="bg-blackish/5 border border-blackish/20 text-[10px] px-2 py-1 rounded-md hover:bg-blackish hover:text-cream transition-colors dark:bg-teal/10 dark:border-teal/30 dark:text-teal dark:hover:bg-teal/20">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </CardHeader>
-            <CardContent className="flex flex-col flex-1">
-              <p className="text-sm text-foreground dark:text-cream/90 mb-6 flex-1">
-                {project.description}
-              </p>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {project.tags.map((tag) => (
+                    <Badge key={tag} variant="default" className="bg-blackish/5 border border-blackish/20 text-[10px] px-2 py-1 rounded-md hover:bg-blackish hover:text-cream transition-colors dark:bg-teal/10 dark:border-teal/30 dark:text-teal dark:hover:bg-teal/20">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </CardHeader>
+              <CardContent className="flex flex-col flex-1">
+                <p className="text-sm text-foreground dark:text-cream/90 mb-6 flex-1">
+                  {project.description}
+                </p>
 
-              <div className="flex items-center gap-3 mt-auto">
-                {project.links
-                  .filter(link => link.type === 'Article' || link.type === 'Source')
-                  .map((link) => {
-                    if (link.type === 'Article') {
-                      return (
-                        <Link key={link.type} href={`/projects/${project.slug}`}>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-2 border-blackish shadow-[4px_4px_0px_#1A1A1A] hover:shadow-[2px_2px_0px_#1A1A1A] active:shadow-[1px_1px_0px_#1A1A1A] transition-all font-bold text-xs h-8 bg-pink/10 hover:bg-pink/20 dark:bg-pink/20 dark:hover:bg-pink/30 dark:text-pink dark:border-pink"
-                          >
-                            Article
-                          </Button>
-                        </Link>
-                      );
-                    }
-
-                    return (
+                <div className="flex items-center gap-3 mt-auto">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-2 border-blackish shadow-[4px_4px_0px_#1A1A1A] hover:shadow-[2px_2px_0px_#1A1A1A] active:shadow-[1px_1px_0px_#1A1A1A] transition-all font-bold text-xs h-8 bg-pink/10 hover:bg-pink/20 dark:bg-pink/20 dark:hover:bg-pink/30 dark:text-pink dark:border-pink"
+                  >
+                    Article
+                  </Button>
+                  {project.links
+                    .filter(link => link.type === 'Source' || link.type === 'Demo')
+                    .map((link) => (
                       <a
                         key={link.type}
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <Button
                           variant="outline"
@@ -83,11 +76,11 @@ export default function ProjectsPage() {
                           {link.type}
                         </Button>
                       </a>
-                    )
-                  })}
-              </div>
-            </CardContent>
-          </Card>
+                    ))}
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>
