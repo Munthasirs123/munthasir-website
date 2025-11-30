@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, User, BookOpen, PenSquare, BrainCircuit, Github, Twitter, Linkedin, Mail, Download } from "lucide-react";
+import { ArrowRight, User, BookOpen, PenSquare, Sparkles, Github, Twitter, Linkedin, Mail, Download } from "lucide-react";
 import { UserAvatar } from "@/components/user-avatar";
 
 export default function HomePage() {
@@ -77,8 +77,11 @@ export default function HomePage() {
                 <h2 className="text-3xl font-bold mb-4 dark:text-mustard">
                   Building meaningful tools that add value!
                 </h2>
+                <p className="text-lg leading-relaxed dark:text-cream/90 mb-4">
+                  As a product lead, I've always loved solving problems through technology!
+                </p>
                 <p className="text-lg leading-relaxed dark:text-cream/90">
-                  As a product lead, I've always loved solving problems through technology and the rise of AI has only furthered my passion to build and ship simple solutions that add genuine value.
+                  Now with the rise of AI, that love continues to grow and further my passion to build and ship solutions that add genuine value.
                 </p>
               </div>
 
@@ -147,8 +150,8 @@ export default function HomePage() {
           </div>
 
           <Link href="/canvas">
-            <Button className="bg-blackish text-cream hover:bg-blackish/80 dark:bg-cream dark:text-blackish dark:hover:bg-cream/90 text-lg px-8 py-6 rounded-full border-2 border-transparent hover:scale-105 transition-transform shadow-[4px_4px_0px_#888] dark:shadow-[4px_4px_0px_#444]">
-              Explore The Canvas <BrainCircuit className="ml-2 h-5 w-5" />
+            <Button className="bg-purple text-cream hover:bg-purple/80 dark:bg-blackish dark:text-purple dark:border-purple dark:hover:bg-blackish/80 text-lg px-8 py-6 rounded-full border-2 border-blackish hover:scale-105 transition-transform shadow-[4px_4px_0px_#1A1A1A] dark:shadow-[4px_4px_0px_#A855F7]">
+              Explore The Canvas <Sparkles className="ml-2 h-5 w-5" />
             </Button>
           </Link>
         </div>
@@ -159,7 +162,7 @@ export default function HomePage() {
         <div className="flex justify-between items-end mb-8">
           <div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-2">Recent Posts</h2>
-            <p className="text-muted-foreground">Thoughts on code, design, and everything in between.</p>
+            <p className="text-muted-foreground">Thoughts on AI, new tools, learnings and everything in between</p>
           </div>
           <Link href="/blog">
             <Button variant="outline" className="hidden sm:flex border-2 border-blackish shadow-[4px_4px_0px_#1A1A1A] hover:translate-y-1 hover:shadow-none transition-all">
@@ -234,3 +237,5 @@ export default function HomePage() {
     </>
   );
 }
+
+

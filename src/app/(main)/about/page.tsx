@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { getPageContent } from "@/lib/posts";
 
 export const metadata: Metadata = {
   title: "About",
@@ -18,60 +19,33 @@ type TimelineEvent = {
   description: string;
 };
 
-// Timeline events – feel free to customize to your real history
-const timelineEvents: TimelineEvent[] = [
-  {
-    year: "2023",
-    title: "Senior Full-Stack Developer",
-    company: "TechCorp Inc.",
-    duration: "February 2023 - Present",
-    description:
-      "Leading development of next-gen web applications. Building scalable systems with React, Next.js, and Node.js. Mentoring junior developers and contributing to open-source projects.",
-  },
-  {
-    year: "2021",
-    title: "Product Engineer",
-    company: "StartupCo",
-    duration: "July 2021 - 2023",
-    description:
-      "Built core product features from the ground up. Collaborated with design and product teams to ship user-centric experiences. Grew the platform from 1K to 50K users.",
-  },
-  {
-    year: "2020",
-    title: "Launched Personal Blog",
-    company: "Side Project",
-    duration: "2020 - Present",
-    description:
-      "Started writing about web development, design systems, and the creative process. Published 50+ articles reaching 100K+ readers. Built a community of fellow creators.",
-  },
-];
+type BadgeData = {
+  text: string;
+  variant: "default" | "mustard" | "teal" | "tangerine";
+};
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const { title, contentHtml, data } = await getPageContent("about");
+  const timelineEvents = (data.timeline || []) as TimelineEvent[];
+  const badges = (data.badges || []) as BadgeData[];
+
   return (
     <div className="container py-12 md:py-24 px-4 md:px-6">
       <header className="mb-12 space-y-8">
 
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">
-          About Me
+          {title}
         </h1>
-        <div className="max-w-[700px] text-muted-foreground md:text-xl space-y-4">
-          <p>
-            I’m based in Greater Boston, MA and work as a Product Owner at CVS Health. Previously, I’ve held product, scrum master & analyst roles driving digital transformation for clients in diverse domains
-          </p>
-          <p>
-            I am typically the most technical person in a room full of business focused people, and the most business oriented person in a room full of technical people 🙂
-          </p>
-          <p>
-            In my spare time, I like to build apps, research AI and write about my learnings!
-          </p>
-        </div>
+        <div
+          className="max-w-[700px] text-muted-foreground md:text-xl space-y-4 prose dark:prose-invert"
+          dangerouslySetInnerHTML={{ __html: contentHtml }}
+        />
         <div className="flex flex-wrap gap-4">
-          <Badge variant="default" className="border-2 border-blackish">
-            Greater Boston, MA
-          </Badge>
-          <Badge variant="mustard" className="border-2 border-blackish">
-            Always up for coffee!
-          </Badge>
+          {badges.map((badge, index) => (
+            <Badge key={index} variant={badge.variant} className="border-2 border-blackish">
+              {badge.text}
+            </Badge>
+          ))}
         </div>
       </header>
 

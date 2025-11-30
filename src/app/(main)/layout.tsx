@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { Github, Twitter, Linkedin, PenSquare, BookOpen, User, BrainCircuit, FileText, Mail, Download } from "lucide-react";
+import { Github, Twitter, Linkedin, PenSquare, BookOpen, User, Sparkles, FileText, Mail, Download } from "lucide-react";
 
 export default function MainLayout({
     children,
@@ -40,17 +40,17 @@ export default function MainLayout({
                             Projects
                         </Link>
                         <Link href="/canvas" className="flex items-center text-muted-foreground hover:text-foreground">
-                            <BrainCircuit className="h-4 w-4 mr-2" />
+                            <Sparkles className="h-4 w-4 mr-2" />
                             The Canvas
                         </Link>
                         <Link href="/about" className="flex items-center text-muted-foreground hover:text-foreground">
                             <User className="h-4 w-4 mr-2" />
                             About Me
                         </Link>
-                        <Link href="#" className="flex items-center text-muted-foreground hover:text-foreground">
+                        <a href="/resume.pdf" download className="flex items-center text-muted-foreground hover:text-foreground">
                             <FileText className="h-4 w-4 mr-2" />
                             Resume
-                        </Link>
+                        </a>
                     </nav>
 
                     <hr className="border-blackish my-4" />
@@ -97,3 +97,4 @@ export default function MainLayout({
         </div>
     );
 }
+

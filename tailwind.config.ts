@@ -26,6 +26,8 @@ const config: Config = {
         'teal': '#00A0A0',
         'tangerine': '#F08080',
         'pink': '#F8B195',
+        'purple': '#A855F7',
+        'lime': '#84CC16',
         // --- shadcn colors ---
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

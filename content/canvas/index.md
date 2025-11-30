@@ -36,17 +36,5 @@ thoughts:
 latest_reads:
   - title: "Agentic Design Patterns - Antonio Gulli"
     url: "https://github.com/sarwarbeing-ai/Agentic_Design_Patterns/blob/main/Agentic_Design_Patterns.pdf"
-visual_inspiration:
-  - color: "bg-pink"
-    label: "Retro Vibes"
-  - color: "bg-teal"
-    label: "Neon UI"
-  - color: "bg-mustard"
-    label: "Bold Type"
-  - color: "bg-tangerine"
-    label: "Gradient"
-  - color: "bg-pink/70"
-    label: "Nostalgia"
-  - color: "bg-teal/80"
-    label: "Playful"
+
 ---

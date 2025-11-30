@@ -1,5 +1,6 @@
 import { getCanvasContent } from "@/lib/canvas";
 import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Card } from "@/components/ui/card";
 import { Sparkles, BookOpen } from "lucide-react";
 
@@ -18,20 +19,29 @@ export default function CanvasContent({ showBackLink = false }: { showBackLink?:
 
             <div className="relative z-10 max-w-5xl mx-auto space-y-8">
                 {/* HEADER */}
-                <header className="text-center mb-8">
+                <header className="text-center mb-8 relative pt-8 md:pt-0">
+                    <div className="absolute right-0 top-0">
+                        <ThemeToggle />
+                    </div>
                     {showBackLink && (
-                        <Link href="/" className="inline-flex items-center text-xs font-mono text-muted-foreground hover:text-blackish dark:hover:text-cream mb-4 hover:underline transition-colors">
-                            <ArrowLeft className="w-3 h-3 mr-1" />
-                            back to home
-                        </Link>
+                        <div className="absolute left-0 top-0">
+                            <Link href="/" className="inline-flex items-center text-xs font-mono text-muted-foreground hover:text-blackish dark:hover:text-cream hover:underline transition-colors">
+                                <ArrowLeft className="w-3 h-3 mr-1" />
+                                back to home
+                            </Link>
+                        </div>
                     )}
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-2 dark:text-cream">
                         THE CANVAS
                     </h1>
-                    <p className="text-sm text-muted-foreground dark:text-cream/60 italic">
-                        A deep dive into my thoughts.<br />
-                        Unstructured. Unfiltered. Unscripted
-                    </p>
+                    <div className="flex flex-col items-center gap-1">
+                        <p className="text-sm text-muted-foreground dark:text-cream/60 italic">
+                            A deep dive into my thoughts. Unstructured. Unfiltered. Unscripted
+                        </p>
+                        <span className="font-mono text-[10px] text-muted-foreground/60 dark:text-cream/40">
+                            Published on Nov 28th, 2025
+                        </span>
+                    </div>
                 </header>
 
                 {/* CURRENT FOCUS - Full width, new color */}
@@ -162,7 +172,7 @@ export default function CanvasContent({ showBackLink = false }: { showBackLink?:
                             <div className="w-6 h-6 rounded-full bg-pink border-2 border-blackish dark:border-cream flex items-center justify-center">
                                 <span className="text-xs font-bold">📷</span>
                             </div>
-                            <h3 className="text-xl font-bold dark:text-cream">MOODBOARD</h3>
+                            <h3 className="text-xl font-bold dark:text-cream">Visual Inspiration</h3>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
                             {content.moodboard.map((imageUrl, i) => (
@@ -196,9 +206,7 @@ export default function CanvasContent({ showBackLink = false }: { showBackLink?:
                 </Card>
 
                 {/* Footer note */}
-                <p className="text-xs text-center text-muted-foreground dark:text-cream/50 italic pb-8">
-                    This canvas updates whenever my brain decides which is constantly 🧠
-                </p>
+                {/* Footer note removed as requested */}
             </div>
         </div>
     );

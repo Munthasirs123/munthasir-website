@@ -100,6 +100,7 @@ export async function getPageContent(fileName: string) {
   return {
     title: data.title as string,
     contentHtml,
+    data,
   };
 }
 

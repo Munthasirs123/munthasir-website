@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { Github, Twitter, Linkedin, PenSquare, BookOpen, User, BrainCircuit, Home, FileText } from "lucide-react";
+import { CSPostHogProvider } from "@/components/posthog-provider";
 
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -30,7 +28,9 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased h-full" suppressHydrationWarning>
         <ThemeProvider>
-          {children}
+          <CSPostHogProvider>
+            {children}
+          </CSPostHogProvider>
         </ThemeProvider>
       </body>
     </html>
